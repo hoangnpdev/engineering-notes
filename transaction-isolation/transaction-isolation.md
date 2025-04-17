@@ -6,7 +6,7 @@ level high enough in exchange for lower performance.
 
 Given context: two concurrent transaction A and B.
 
-Remember: In postgres, row-level doesn't affect data querying at all 
+Remember: In postgres, row-level lock doesn't affect data querying at all 
 (just affects on share-lock, share and key share and write-lock, key & no-key)
 
 ## 1. phenomena: dirty read
@@ -47,6 +47,7 @@ Postgresql Syntax:
 
 Postgres only use a snapshot at time transaction begin for all command within the transaction.
 So transaction can't see any data change during the transaction. 
+
 Transaction will have to wait other transaction that have lock on its target row finish first,
 and will be rolled back if any of its target rows is deleted or updated.
 
