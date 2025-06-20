@@ -1,7 +1,7 @@
 # K8S 
 
 ## Purpose
-Resource Manament Tool for cluster.
+General Resource Manament Tool for cluster 
 ## Input
 - Resource configuration (system states)
 ## Output
