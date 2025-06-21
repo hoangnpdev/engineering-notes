@@ -3,9 +3,9 @@
 ## Purpose
 Resource Manament Tool for cluster.
 ## Input
-- Resource configuration (system states)
+- Input
 ## Output
-- Resource state
+- Output
 ## Arch
 ![](k8s.drawio.svg)
 
