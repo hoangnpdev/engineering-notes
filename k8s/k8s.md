@@ -9,10 +9,6 @@ Resource Manament Tool for cluster.
 ## Arch
 ![](k8s.drawio.svg)
 
-# NFS
-
-## Purpose
-## Arch
 
 
 
