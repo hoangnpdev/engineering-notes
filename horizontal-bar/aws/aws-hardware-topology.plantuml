@@ -1,0 +1,31 @@
+@startuml
+
+class aws_region {
+}
+
+class aws_AZ {
+}
+
+class aws_DataCenter {
+}
+
+
+
+together {
+class aws_service_or_vNetwork {
+}
+
+
+aws_region --{ aws_AZ
+
+aws_AZ --{ aws_DataCenter
+
+aws_region <--> aws_region: mix of private connection and public internet connection (50+ms)
+
+aws_region --{ "n" aws_service_or_vNetwork
+
+aws_AZ <--> aws_AZ: superb private connection (<5ms)
+
+aws_DataCenter <--> aws_DataCenter: superb private connection (<5ms)
+
+@enduml
