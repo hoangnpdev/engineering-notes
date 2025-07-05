@@ -5,10 +5,10 @@
 3. Define class's main methods
 4. Write unit test when necessary (optional)
 5. Coding
-6. resolve duplicate code segment
-7. decouple class dependency
-8. clean code: 
+6. clean code: 
    - no. LOC of each function, 
    - no. parameters of each function
    - no. function of each class
-   - prioritize composition over inheritance for better maintaining
+7. resolve duplicate code segment
+8. decouple class dependency, prioritize composition over inheritance for better maintaining
+
