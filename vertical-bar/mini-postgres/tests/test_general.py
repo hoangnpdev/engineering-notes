@@ -1,5 +1,5 @@
-from executor.postgres_executor import QueryExecutor
-from postgres_io.postgres_io import FileManager
+from mini_posgres.postgres_executor import QueryExecutor
+from mini_posgres.postgres_io import FileManager
 
 
 def test_create_table():

@@ -1,24 +1,11 @@
 from typing import List
-from postgres_io.postgres_io import FileManager
-from buffer.buffer_manager import BufferManager
-
-
-class QueryExecutor:
-
-    @staticmethod
-    def create_table(table_name, columns: List[str]):
-        # convert column_name to bytes
-        first_page = MetaPage.new_page(columns)
-        FileManager.save_table(first_page.to_bytes(), table_name)
-
-    @staticmethod
-    def list_column(table_name: str):
-        page_data = BufferManager.load(table_name, 0)
-        return MetaPage.from_page(page_data).list_columns()
 
 
 class MetaPage:
-
+    """
+        4 bytes: num of column.
+        arr of 32 bytes: each is column name.
+    """
     def __init__(self):
         self.data: bytes = bytes(0)
 
@@ -49,4 +36,26 @@ class MetaPage:
 
     def to_bytes(self):
         return self.data
+
+
+class TuplePage:
+    """
+    arr of 4 bytes: each entry is an (offset, length) pointing to actual tuple
+    ...
+    arr of tuples/rows: is stored in reversed order from bottom of page.
+    """
+    def __init__(self):
+        self.data: bytes = bytes(0)
+
+
+
+
+
+
+class Tuple:
+    def __init__(self):
+        self.data: bytes = bytes(0)
+
+
+
 
