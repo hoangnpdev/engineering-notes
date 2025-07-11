@@ -47,12 +47,19 @@ class TuplePage:
     def __init__(self):
         self.data: bytes = bytes(0)
 
+    @classmethod
+    def from_page(cls, content: bytes):
+        instance = cls()
+        instance.data = content
 
-
+    def rows(self):
 
 
 
 class Tuple:
+    """
+    array of bytes: all field is serialized sequentially
+    """
     def __init__(self):
         self.data: bytes = bytes(0)
 

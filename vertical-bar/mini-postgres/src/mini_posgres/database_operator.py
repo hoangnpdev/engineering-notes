@@ -1,10 +1,11 @@
 from typing import List
-from mini_posgres.postgres_io import FileManager
+from mini_posgres.file_manager import FileManager
 from mini_posgres.buffer_manager import BufferManager
+from mini_posgres.table_operator import Table
 from mini_posgres.page_manager import MetaPage
 
 
-class QueryExecutor:
+class MiniPostgres:
 
     @staticmethod
     def create_table(table_name, columns: List[str]):
@@ -13,15 +14,8 @@ class QueryExecutor:
         FileManager.save_table(first_page.to_bytes(), table_name)
 
     @staticmethod
-    def list_column(table_name: str):
-        page_data = BufferManager.load(table_name, 0)
-        return MetaPage.from_page(page_data).list_columns()
+    def load_table(table_name: str) -> Table:
+        return Table(table_name)
 
-    def insert_row(self):
-        # Free Space map
-
-
-    def update_row(self):
-        # = delte old row and insert new row
 
 
