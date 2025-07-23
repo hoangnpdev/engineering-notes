@@ -53,7 +53,7 @@ class TuplePage:
         instance.data = content
 
     def rows(self):
-
+        return None
 
 
 class Tuple:
@@ -63,6 +63,31 @@ class Tuple:
     def __init__(self):
         self.data: bytes = bytes(0)
 
+
+class FSM:
+    """
+    each byte of FSM page is corresponding to a TuplePage (256 unit). 1 unit = round_down(block_size / 256 - 32 byte)
+
+    structure:
+    root:
+        branch#1:
+            leaf#1
+            leaf#4096
+        branch#4096:
+            leaf#1:
+            leaf#4096:
+    a meta data about the current number of tuple page is assigned.
+    """
+    def __init__(self):
+        self.data: bytes = bytes(0)
+
+
+    def find_page(self, minimal_free_space):
+
+
+
+
+class FSMPage:
 
 
 
