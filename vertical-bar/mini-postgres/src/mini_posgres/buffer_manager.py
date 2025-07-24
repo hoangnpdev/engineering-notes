@@ -1,4 +1,4 @@
-from mini_posgres.file_manager import FileManager
+from mini_posgres.postgres_file import FileManager
 
 
 class BufferManager:

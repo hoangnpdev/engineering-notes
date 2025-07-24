@@ -1,16 +1,18 @@
 import os
 import shutil
-from dataclasses import dataclass
+from mini_posgres.config import Config
 
 
 class FileManager:
     PATH = 'tmp'
 
     @classmethod
-    def save_table(cls, content: bytes, filename: str):
+    def save_table(cls, tuple_content: bytes, fsm_content, table_name: str):
         os.mkdir(cls.PATH)
-        with open(cls.get_path(filename), 'wb') as table_file:
-            table_file.write(content)
+        with open(cls.get_path(table_name), 'wb') as table_file:
+            table_file.write(tuple_content)
+        with open(cls.get_fsm_path(table_name), 'wb') as fsm_file:
+            fsm_file.write(fsm_content)
 
     @classmethod
     def read_page(cls, filename: str, page_offset=0):
@@ -31,14 +33,15 @@ class FileManager:
         shutil.rmtree(cls.PATH)
 
     @classmethod
-    def get_path(cls, filename: str):
-        return f'{cls.PATH}/{filename}.tbl'
+    def get_path(cls, table_name: str):
+        return f'{cls.PATH}/{table_name}.tbl'
+
+    @classmethod
+    def get_fsm_path(cls, table_name: str):
+        return f'{cls.PATH}/{table_name}.fsm'
 
 
 
-@dataclass(frozen=True)
-class Config:
-    PAGE_SIZE = 8 * 1024
 
 
 

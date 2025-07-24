@@ -1,6 +1,5 @@
 from typing import List
 
-
 class MetaPage:
     """
         4 bytes: num of column.
@@ -8,6 +7,7 @@ class MetaPage:
     """
     def __init__(self):
         self.data: bytes = bytes(0)
+
 
     @classmethod
     def new_page(cls, columns: List[str]):
@@ -62,32 +62,5 @@ class Tuple:
     """
     def __init__(self):
         self.data: bytes = bytes(0)
-
-
-class FSM:
-    """
-    each byte of FSM page is corresponding to a TuplePage (256 unit). 1 unit = round_down(block_size / 256 - 32 byte)
-
-    structure:
-    root:
-        branch#1:
-            leaf#1
-            leaf#4096
-        branch#4096:
-            leaf#1:
-            leaf#4096:
-    a meta data about the current number of tuple page is assigned.
-    """
-    def __init__(self):
-        self.data: bytes = bytes(0)
-
-
-    def find_page(self, minimal_free_space):
-
-
-
-
-class FSMPage:
-
 
 
