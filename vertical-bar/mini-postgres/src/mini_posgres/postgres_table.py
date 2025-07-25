@@ -23,6 +23,7 @@ class Table:
 
     def insert(self, rows: List[Dict[str, Any]]):
         # Free Space map
+        # todo
         return
 
     def rows(self) -> List[Dict[str, Any]]:
