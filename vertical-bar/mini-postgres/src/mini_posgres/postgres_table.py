@@ -1,6 +1,7 @@
 from typing import List, Dict, Any
 
 from mini_posgres.buffer_manager import BufferManager
+from mini_posgres.postgres_fsm import FSMBlock
 from mini_posgres.postgres_tuple import MetaPage
 from mini_posgres.postgres_file import FileManager
 
@@ -13,7 +14,8 @@ class Table:
     @classmethod
     def new_table(cls, table_name, columns):
         first_page = MetaPage.new_page(columns)
-        FileManager.save_table(first_page.to_bytes(), table_name)
+        fsm_root_block = FSMBlock.new_root_block()
+        FileManager.save_table(first_page.to_bytes(), fsm_root_block.to_bytes(), table_name)
 
     def columns(self):
         page_data = BufferManager.load(self.table_name, 0)

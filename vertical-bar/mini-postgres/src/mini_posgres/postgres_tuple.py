@@ -1,5 +1,6 @@
 from typing import List
 
+
 class MetaPage:
     """
         4 bytes: num of column.
@@ -7,7 +8,6 @@ class MetaPage:
     """
     def __init__(self):
         self.data: bytes = bytes(0)
-
 
     @classmethod
     def new_page(cls, columns: List[str]):
