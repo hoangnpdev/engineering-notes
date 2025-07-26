@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any
 
 
 class MetaPage:
@@ -38,6 +38,17 @@ class MetaPage:
         return self.data
 
 
+class Tuple:
+    """
+    array of bytes: all field is serialized sequentially
+    """
+    def __init__(self, row: Dict[str, Any]):
+        self.data: bytes = bytes[0]  # todo
+
+    def tuple_size(self):
+        return 0  # todo
+
+
 class TuplePage:
     """
     arr of 4 bytes: each entry is an (offset, length) pointing to actual tuple
@@ -51,16 +62,16 @@ class TuplePage:
     def from_page(cls, content: bytes):
         instance = cls()
         instance.data = content
+        return instance
+
+    def free_space_left(self):
+        return  # todo
+
+    def insert_tuple(self, tuple: Tuple):
+        return  # todo
 
     def rows(self):
-        return None
+        return  # todo
 
-
-class Tuple:
-    """
-    array of bytes: all field is serialized sequentially
-    """
-    def __init__(self):
-        self.data: bytes = bytes(0)
 
 

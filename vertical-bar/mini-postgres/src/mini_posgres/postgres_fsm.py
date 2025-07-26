@@ -46,6 +46,10 @@ class FSM:
         l3_leaf_position = FSMBlock.from_block(l3_block).traverse(minimal_free_space)
         return self.get_tuple_block_position(l1_leaf_position, l2_leaf_position, l3_leaf_position)
 
+    def update_block_free_space_left(self, block_offset, new_free_size):
+        return  # todo
+
+
 
 # only handle fsm block
 class FSMBlock:
