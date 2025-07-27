@@ -10,12 +10,16 @@ class BufferManager:
         cache_id = f'{table_name}#{str(page_offset)}'
         if cache_id in cls.dict:
             return cls.dict[cache_id]
-        page_data = FileManager.read_page(table_name, page_offset)
+        page_data = FileManager.read_tuple_block(table_name, page_offset)
         cls.dict[cache_id] = page_data
         return page_data
 
     @classmethod
     def load_fsm_block(cls, table_name, block_offset=0):
-        # todo
-        return None
+        cache_id = f'{table_name}#{block_offset}'
+        if cache_id in cls.fsm_dict:
+            return cls.fsm_dict[cache_id]
+        fsm_block = FileManager.read_fsm_block(table_name, page_offset)
+        cls.fsm_dict[cache_id] = fsm_block
+        return fsm_block
 

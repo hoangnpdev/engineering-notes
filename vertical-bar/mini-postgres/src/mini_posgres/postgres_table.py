@@ -26,7 +26,10 @@ class Table:
         for row in rows:
             # calculate tuple size
             i_tuple = Tuple(row)
-            block_offset = self.fsm.find_block_with_enough_free_space(i_tuple.tuple_size())
+            block_offset = self.fsm.find_block_with_enough_free_space(
+                i_tuple.tuple_size(),
+                self.size()
+            )
             block_data = BufferManager.load_fsm_block(self.table_name, block_offset)
             block = TuplePage.from_page(block_data)
             block.insert_tuple(i_tuple)
@@ -38,5 +41,8 @@ class Table:
         for i in range(1, num_page):
             page_data = BufferManager.load(self.table_name, i)
         return [{}]
+
+    def size(self):
+        return FileManager.get_num_pages(self.table_name)
 
 

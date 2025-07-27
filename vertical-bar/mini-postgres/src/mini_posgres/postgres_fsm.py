@@ -31,7 +31,7 @@ class FSM:
         # todo
         return 0
 
-    def find_block_with_enough_free_space(self, minimal_free_space):
+    def find_block_with_enough_free_space(self, minimal_free_space, num_current_blocks=0):
         # root traverse (l1)
         block_0 = BufferManager.load_fsm_block(self.table_name, 0)
         l1_leaf_position = FSMBlock.from_block(block_0).traverse(minimal_free_space)
@@ -48,7 +48,6 @@ class FSM:
 
     def update_block_free_space_left(self, block_offset, new_free_size):
         return  # todo
-
 
 
 # only handle fsm block
@@ -68,9 +67,30 @@ class FSMBlock:
         instance.data = block
         return instance
 
-    def traverse(self, minimal_free_space):
+    def traverse(self, minimal_free_space, num_of_active_leaf):
         # todo
-        return 0
+        # 1 fsm block's tree depth 12 + 1 level: 0 -> 12
+
+        if self.data[1] < minimal_free_space:
+            return -1
+        node_pos_in_last_level = 1
+        for level in range(0, 12 + 1):
+            left_child_pos = 2 * (node_pos_in_last_level - 1) + 1
+            left_child = 2 ** level + left_child_pos
+            if self.data[left_child] > minimal_free_space:
+                node_pos_in_last_level = left_child_pos
+                if level == 12:
+                    return left_child_pos
+                continue
+            right_child_pos = 2 * (node_pos_in_last_level - 1) + 2
+            right_child = 2 ** level + right_child_pos
+            if self.data[right_child] > minimal_free_space:
+                node_pos_in_last_level = right_child_pos
+                if level == 12:
+                    return right_child_pos
+                continue
+            return -1
+    # todo refactor this function
 
     def to_bytes(self):
         return self.data

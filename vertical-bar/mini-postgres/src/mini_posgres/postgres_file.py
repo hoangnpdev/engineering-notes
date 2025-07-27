@@ -15,10 +15,16 @@ class FileManager:
             fsm_file.write(fsm_content)
 
     @classmethod
-    def read_page(cls, filename: str, page_offset=0):
+    def read_tuple_block(cls, filename: str, page_offset=0):
         with open(cls.get_path(filename)) as table_file:
-            table_file.seek(page_offset)
+            table_file.seek(page_offset * Config.PAGE_SIZE)
             return table_file.read(Config.PAGE_SIZE)
+
+    @classmethod
+    def read_fsm_block(cls, filename: str, block_offset=0):
+        with open(cls.get_fsm_path(filename)) as fsm_file:
+            fsm_file.seek(block_offset * Config.PAGE_SIZE)
+            return fsm_file.read(Config.PAGE_SIZE)
 
     @classmethod
     def get_num_pages(cls, table_name: str):
