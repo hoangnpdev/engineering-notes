@@ -34,7 +34,7 @@ class Table:
             block = TuplePage.from_page(block_data)
             block.insert_tuple(i_tuple)
             # update fsm
-            self.fsm.update_block_free_space_left(block_offset, block.free_space_left())
+            self.fsm.update_tuple_block_free_space_size(block_offset, block.free_space_left())
 
     def rows(self) -> List[Dict[str, Any]]:
         num_page = FileManager.get_num_pages(self.table_name)
