@@ -82,8 +82,12 @@ class FSMBlock:
         self.data = bytes(block)
 
     def is_out_of_bounds(self, node_pos, num_of_active_leaf):
-        # todo
-        return
+        node_level = self.get_level(node_pos)
+        level_boundary = num_of_active_leaf
+        for level in range(12, node_level - 1, -1):
+            level_boundary = level_boundary / 2 + level_boundary % 2
+        node_pos_in_row = self.get_node_pos_in_row(node_pos)
+        return node_pos_in_row > level_boundary
 
     def get_parent_pos(self, child_pos):
         # todo
@@ -101,6 +105,12 @@ class FSMBlock:
         # todo
         return 12
 
+    # 1 -> ...
+    def get_node_pos_in_row(self, node_pos):
+        # todo
+        return 0
+
+    # 1 -> ...
     def get_leaf_pos(self, node_pos):
         # todo
         return 0
