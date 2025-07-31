@@ -81,7 +81,7 @@ class FSMBlock:
                 break
         self.data = bytes(block)
 
-    def is_out_of_bounds(self, pos_in_row, num_of_active_leaf):
+    def is_out_of_bounds(self, node_pos, num_of_active_leaf):
         # todo
         return
 
