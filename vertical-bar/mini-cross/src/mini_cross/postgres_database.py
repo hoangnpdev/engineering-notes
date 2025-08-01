@@ -1,5 +1,5 @@
 from typing import List
-from mini_posgres.postgres_table import Table
+from mini_cross.postgres_table import Table
 
 
 # handle database operator at row, table level

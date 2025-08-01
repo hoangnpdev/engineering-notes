@@ -1,5 +1,5 @@
-from mini_posgres.postgres_database import MiniPostgres
-from mini_posgres.postgres_file import FileManager
+from mini_cross.postgres_database import MiniPostgres
+from mini_cross.postgres_file import FileManager
 
 
 def test_create_table():

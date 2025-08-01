@@ -1,9 +1,9 @@
 from typing import List, Dict, Any
 
-from mini_posgres.buffer_manager import BufferManager
-from mini_posgres.postgres_fsm import FSMBlock, FSM
-from mini_posgres.postgres_tuple import MetaPage, TuplePage, Tuple
-from mini_posgres.postgres_file import FileManager
+from mini_cross.buffer_manager import BufferManager
+from mini_cross.postgres_fsm import FSMBlock, FSM
+from mini_cross.postgres_tuple import MetaPage, TuplePage, Tuple
+from mini_cross.postgres_file import FileManager
 
 
 # handle table crud operator, no byte operator

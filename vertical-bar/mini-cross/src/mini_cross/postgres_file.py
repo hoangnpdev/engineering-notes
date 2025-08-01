@@ -1,6 +1,6 @@
 import os
 import shutil
-from mini_posgres.config import Config
+from mini_cross.config import Config
 
 
 class FileManager:
