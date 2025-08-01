@@ -19,7 +19,7 @@ class BufferManager:
         cache_id = f'{table_name}#{block_offset}'
         if cache_id in cls.fsm_dict:
             return cls.fsm_dict[cache_id]
-        fsm_block = FileManager.read_fsm_block(table_name, page_offset)
+        fsm_block = FileManager.read_fsm_block(table_name, block_offset)
         cls.fsm_dict[cache_id] = fsm_block
         return fsm_block
 
