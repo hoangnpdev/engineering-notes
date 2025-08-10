@@ -1,13 +1,14 @@
 from typing import List, Dict, Any
 
-from mini_cross.buffer_manager import BufferManager
-from mini_cross.postgres_fsm import FSMBlock, FSM
-from mini_cross.postgres_tuple import MetaPage, TuplePage, Tuple
-from mini_cross.postgres_file import FileManager
+from mini_cross.postgres.buffer_manager import BufferManager
+from mini_cross.postgres.postgres_fsm import FSMBlock, FSM
+from mini_cross.postgres.postgres_tuple import MetaPage, TuplePage, Tuple
+from mini_cross.postgres.postgres_file import FileManager
+from mini_cross.cross_table import Table
 
 
 # handle table crud operator, no byte operator
-class Table:
+class PostgresTable(Table):
     def __init__(self, table_name):
         self.table_name: str = table_name
         self.fsm: FSM = FSM(table_name)
