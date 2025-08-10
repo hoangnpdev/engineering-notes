@@ -2,7 +2,11 @@ from typing import List, Dict, Any
 
 from mini_cross.cross_table import Table
 
-
+"""
+A separate primary.idx file has the value of the primary key for each N-th row (index_granularity).
+Also, for each column, we have column.mrk files with "marks", which are offsets (byte position) 
+    to each N-th row in the data file
+"""
 class ClickhouseTable(Table):
 
     @classmethod
