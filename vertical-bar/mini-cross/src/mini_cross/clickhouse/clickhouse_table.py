@@ -22,6 +22,11 @@ class ClickhouseTable(Table):
         pass
 
     def insert(self, rows: List[Dict[str, Any]]):
+        # todo
+        pass
+
+    def merge_partitions(self):
+        # todo
         pass
 
     def rows(self) -> List[Dict[str, Any]]:
