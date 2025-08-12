@@ -3,7 +3,7 @@ from typing import List, Dict, Any
 from mini_cross.postgres.buffer_manager import BufferManager
 from mini_cross.postgres.postgres_fsm import FSMBlock, FSM
 from mini_cross.postgres.postgres_tuple import MetaPage, TuplePage, Tuple
-from mini_cross.postgres.postgres_file import FileManager
+from mini_cross.postgres.postgres_file import PostgresFile
 from mini_cross.cross_table import Table
 
 
@@ -17,7 +17,7 @@ class PostgresTable(Table):
     def new_table(cls, table_name, columns):
         first_page = MetaPage.new_page(columns)
         fsm_root_block = FSMBlock.new_root_block()
-        FileManager.save_table(first_page.to_bytes(), fsm_root_block.to_bytes(), table_name)
+        PostgresFile.save_table(first_page.to_bytes(), fsm_root_block.to_bytes(), table_name)
 
     def columns(self):
         page_data = BufferManager.load(self.table_name, 0)
@@ -38,12 +38,12 @@ class PostgresTable(Table):
             self.fsm.update_tuple_block_free_space_size(block_offset, block.free_space_left())
 
     def rows(self) -> List[Dict[str, Any]]:
-        num_page = FileManager.get_num_pages(self.table_name)
+        num_page = PostgresFile.get_num_pages(self.table_name)
         for i in range(1, num_page):
             page_data = BufferManager.load(self.table_name, i)
         return [{}]
 
     def size(self):
-        return FileManager.get_num_pages(self.table_name)
+        return PostgresFile.get_num_pages(self.table_name)
 
 

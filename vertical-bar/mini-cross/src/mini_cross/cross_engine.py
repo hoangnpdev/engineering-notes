@@ -1,8 +1,10 @@
 from typing import List
 
+from mini_cross.clickhouse.clickhouse_table import ClickhouseTable
+from mini_cross.clickhouse.clickhouse_file import ClickHouseFile
 from mini_cross.cross_table import TableRef
 from mini_cross.postgres.postgres_table import PostgresTable
-from mini_cross.postgres.postgres_file import FileManager
+from mini_cross.postgres.postgres_file import PostgresFile
 
 
 # handle database operator at row, table level
@@ -18,11 +20,21 @@ class MiniCross:
         return PostgresTable(table_name)
 
     @staticmethod
+    def create_clickhouse_table(table_name, columns: List[str], keys: List[str]):
+        ClickhouseTable.new_table(table_name, columns, keys)
+
+    @staticmethod
+    def load_clickhouse_table(table_name):
+        return ClickhouseTable(table_name)
+
+    @staticmethod
     def load_table_ref(table_name: str) -> TableRef:
         return TableRef(MiniCross.load_postgres_table(table_name))
 
     @staticmethod
     def destroy():
-        FileManager.destroy()
+        PostgresFile.destroy()
+        ClickHouseFile.destroy()
+
 
 

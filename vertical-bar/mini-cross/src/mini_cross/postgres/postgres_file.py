@@ -1,9 +1,9 @@
 import os
 import shutil
-from mini_cross.postgres.config import Config
+from mini_cross.config import Config
 
 
-class FileManager:
+class PostgresFile:
     PATH = 'tmp'
 
     @classmethod

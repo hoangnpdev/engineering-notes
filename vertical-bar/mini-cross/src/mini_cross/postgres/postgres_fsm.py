@@ -1,5 +1,5 @@
 from mini_cross.postgres.buffer_manager import BufferManager
-from mini_cross.postgres.config import Config
+from mini_cross.config import Config
 
 class FSM:
     """

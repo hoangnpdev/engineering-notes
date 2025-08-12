@@ -4,11 +4,6 @@ from typing import List, Dict, Any
 
 class Table(ABC):
 
-    @classmethod
-    @abstractmethod
-    def new_table(cls, table_name, columns):
-        pass
-
     @abstractmethod
     def columns(self):
         pass

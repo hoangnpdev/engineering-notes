@@ -14,9 +14,13 @@ and the entire compressed block must be decompressed for each column
 
 class ClickhouseTable(Table):
 
+    def __init__(self, table_name):
+        self.table_name = table_name
+
     @classmethod
-    def new_table(cls, table_name, columns):
-        pass
+    def new_table(cls, table_name, columns, keys):
+        # todo
+        return cls(table_name)
 
     def columns(self):
         pass
