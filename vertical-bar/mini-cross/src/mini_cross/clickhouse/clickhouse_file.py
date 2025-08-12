@@ -4,6 +4,11 @@ class ClickHouseFile:
         pass
 
     @staticmethod
+    def save_table(self, table_name, columns, table_metadata):
+        pass
+
+
+    @staticmethod
     def destroy():
         pass
 
