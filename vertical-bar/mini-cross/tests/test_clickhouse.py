@@ -1,4 +1,4 @@
-from mini_cross.cross_engine import MiniCross
+from mini_cross.clickhouse import MiniCross
 
 
 def test_clickhouse_table_creation():
