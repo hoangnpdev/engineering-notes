@@ -10,8 +10,17 @@ class IColumn:
         pass
 
 class MetaBlock:
-    def __init__(self, columns, keys):
+    def __init__(self):
         pass
 
     def to_bytes(self):
         pass
+
+    @classmethod
+    def from_bytes(cls, data):
+        pass
+
+    @classmethod
+    def new(cls, columns, keys):
+        return cls()
+
