@@ -1,5 +1,16 @@
 
 
+class IPart:
+
+    def __init__(self, part_name):
+        pass
+
+    @classmethod
+    def new_part(cls):
+        part_name = None # Logic to generate a new part name
+        return cls(part_name)
+
+
 class IBlock:
     def __init__(self):
         pass

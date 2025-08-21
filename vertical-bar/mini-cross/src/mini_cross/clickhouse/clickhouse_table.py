@@ -2,7 +2,7 @@ from typing import List, Dict, Any
 
 from mini_cross.cross_table import Table
 from mini_cross.clickhouse.clickhouse_file import ClickHouseFile
-from mini_cross.clickhouse.clickhouse_block import MetaBlock, IColumn
+from mini_cross.clickhouse.clickhouse_block import MetaBlock, IColumn, IPart, IBlock
 from mini_cross.clickhouse.clickhouse_idx import PrimaryIndex, ColumnMark
 from mini_cross.clickhouse.config import CLICKHOUSE_CONFIG
 from mini_cross.clickhouse import common_util
@@ -38,6 +38,8 @@ class ClickhouseTable(Table):
         return metablock.keys()
         
 
+    # todo: modify this function where clickhouse_block, clickhouse_idx components interact directly with ClickHouseFile, 
+    # column_mark is under IColumn, IColumn and primary_index is under IPart
     def insert(self, rows: List[Dict[str, Any]]):
         # construct table columns (column list from columns function, byte format) from rows param
         column_names = self.columns()
@@ -71,12 +73,21 @@ class ClickhouseTable(Table):
 
 
     def merge_partitions(self):
-        # todo
-        pass
+        # create merging part
+        merging_part = IPart.new_part()
+        # list all parts
+        ipart_list = [IPart(part_path) for part_path in ClickHouseFile.list_parts(self.table_name)]
+        for column_name in self.columns():
+            origin_icolumns = [part.get_icolumn(column_name) for part in ipart_list]
+            # how to create primary index here?????
+            # merge columns
+            merging_part.get_icolumn[column_name].merge_columns(origin_icolumns)
+            
+            
+
 
     def rows(self) -> List[Dict[str, Any]]:
         pass
 
     def size(self):
         pass
-
