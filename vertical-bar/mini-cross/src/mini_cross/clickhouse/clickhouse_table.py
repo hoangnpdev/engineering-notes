@@ -1,5 +1,6 @@
 from typing import List, Dict, Any
 
+import itertools
 from mini_cross.cross_table import Table
 from mini_cross.clickhouse.clickhouse_file import ClickHouseFile
 from mini_cross.clickhouse.clickhouse_block import MetaBlock, IColumn, IPart, IBlock
@@ -39,7 +40,7 @@ class ClickhouseTable(Table):
         
 
     # todo: modify this function where clickhouse_block, clickhouse_idx components interact directly with ClickHouseFile, 
-    # column_mark is under IColumn, IColumn and primary_index is under IPart
+    # column_mark is under IColumn | IColumn and primary_index is under IPart
     def insert(self, rows: List[Dict[str, Any]]):
         # construct table columns (column list from columns function, byte format) from rows param
         column_names = self.columns()
@@ -77,17 +78,26 @@ class ClickhouseTable(Table):
         merging_part = IPart.new_part()
         # list all parts
         ipart_list = [IPart(part_path) for part_path in ClickHouseFile.list_parts(self.table_name)]
-        for column_name in self.columns():
-            origin_icolumns = [part.get_icolumn(column_name) for part in ipart_list]
-            # how to create primary index here?????
-            # merge columns
-            merging_part.get_icolumn[column_name].merge_columns(origin_icolumns)
+        for batch in itertools.islice(self.merging_generator(ipart_list), CLICKHOUSE_CONFIG.INDEX_GRANULARITY):
+            merging_part.persist_batch(batch)
             
-            
-
-
-    def rows(self) -> List[Dict[str, Any]]:
-        pass
+    
+    def current_min_partitions(ipart_list: List[IPart]) -> IPart:
+        return min(ipart_list, key=lambda part: part.top_keys_tuple())
+    
+    def merging_generator(self, ipart_list: List[IPart]):
+        while any(part.has_data_left() for part in ipart_list):
+            current_min_part = self.current_min_partitions(ipart_list)
+            yield current_min_part.next_row()
+        
+    def select(self, columns: List[str]) -> List[Dict[str, Any]]:
+        ipart_list = [IPart(part) for part in ClickHouseFile.list_parts(self.table_name)]
+        # return rows from all partitions
+        rows = []
+        for part in ipart_list:
+            rows += part.select(columns)
+        return rows
 
     def size(self):
-        pass
+        return sum(IPart(part).size() for part in ClickHouseFile.list_parts(self.table_name))
+

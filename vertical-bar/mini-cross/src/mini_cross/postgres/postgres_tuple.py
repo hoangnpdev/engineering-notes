@@ -71,7 +71,7 @@ class TuplePage:
         return  # todo
 
     def rows(self):
-        return  # todo
+        return []
 
 
 

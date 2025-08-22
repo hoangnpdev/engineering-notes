@@ -29,7 +29,7 @@ class PostgresTable(Table):
             i_tuple = Tuple(row)
             block_offset = self.fsm.find_block_with_enough_free_space(
                 i_tuple.tuple_size(),
-                self.size()
+                self.block_size()
             )
             block_data = BufferManager.load_fsm_block(self.table_name, block_offset)
             block = TuplePage.from_page(block_data)
@@ -43,7 +43,13 @@ class PostgresTable(Table):
             page_data = BufferManager.load(self.table_name, i)
         return [{}]
 
-    def size(self):
+    def block_size(self):
         return PostgresFile.get_num_pages(self.table_name)
 
-
+    def size(self):
+        return sum(
+            [
+                len(TuplePage.from_page(BufferManager.load(self.table_name, i)).rows())
+                for i in range(PostgresFile.get_num_pages(self.table_name))
+            ]
+        )

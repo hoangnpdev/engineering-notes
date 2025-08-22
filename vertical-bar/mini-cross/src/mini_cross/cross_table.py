@@ -13,7 +13,7 @@ class Table(ABC):
         pass
 
     @abstractmethod
-    def rows(self) -> List[Dict[str, Any]]:
+    def select(self, columns: List[str]) -> List[Dict[str, Any]]:
         pass
 
     @abstractmethod
