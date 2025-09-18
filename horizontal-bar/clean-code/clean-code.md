@@ -1,4 +1,4 @@
-# Actionable steps to write or organize clean code 
+# Actionable steps to write or organize code cleanly
 
 1. Separate package by domain, layer
 2. Identify class using SVO strategy to satisfy single responsibility principle
