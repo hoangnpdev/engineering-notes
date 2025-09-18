@@ -3,7 +3,7 @@
 1. Separate package by domain, layer
 2. Identify class using SVO strategy to satisfy single responsibility principle
 3. Define class's main methods
-4. Write unit test when necessary (optional)
+4. Write unit test for main methods
 5. Coding
 6. clean code: 
    - no. LOC of each function, 
