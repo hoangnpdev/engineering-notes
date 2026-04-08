@@ -1,7 +1,7 @@
 # Actionable steps to write or organize code cleanly
 
 # code design
-1. Identify package by domain, layer
+1. Identify package by domain-by-expert/event-storming, layer-by-framework
 2. Identify class using SVO strategy to satisfy single responsibility principle
 3. Identify class's methods
 4. Using inheritance when you make sure it's relationship will never change (prioritize composition over inheritance).
