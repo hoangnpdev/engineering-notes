@@ -1,14 +1,18 @@
 # Actionable steps to write or organize code cleanly
 
-1. Separate package by domain, layer
+# code design
+1. Identify package by domain, layer
 2. Identify class using SVO strategy to satisfy single responsibility principle
-3. Define class's main methods
-4. Write unit test for main methods
-5. Coding
-6. clean code: 
-   - no. LOC of each function, 
-   - no. parameters of each function
-   - no. function of each class
-7. resolve duplicate code segment
-8. decouple class dependency, prioritize composition over inheritance for better maintaining
+3. Identify class's methods
+4. Using inheritance when you make sure it's relationship will never change (prioritize composition over inheritance).
+5. Make sure the number of method parameters doesn't exceed three.
+
+# code implement (using llm)
+5. Write unit test for main methods
+6. Coding
+
+# review (support by llm)
+7. Make sure function not too lengthy.
+8. Remove duplicated code segments.
+
 
