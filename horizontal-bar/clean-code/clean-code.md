@@ -3,7 +3,7 @@
 # code design
 1. Identify package by domain-by expert/llm for simplicity, event-storming for complex situation, layer-by-framework
 2. Identify class using SVO strategy to satisfy single responsibility principle
-3. Identify class's methods
+3. Identify class's main methods
 4. Using inheritance when you make sure it's relationship will never change (prioritize composition over inheritance).
 5. Make sure the number of method parameters doesn't exceed three.
 
