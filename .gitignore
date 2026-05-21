@@ -1,2 +1,4 @@
-gemini-rag/.venv/*
-gemini-rag/index/*
+**/.venv/*
+**/__pycache__/
+.idea/
+.gitignore
